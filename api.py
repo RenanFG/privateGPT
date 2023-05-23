@@ -1,4 +1,5 @@
 from flask import Flask, request
+from restPrivateGPT import get_answer
 
 app = Flask(__name__)
 
@@ -6,9 +7,8 @@ app = Flask(__name__)
 def post_endpoint():
     data = request.get_json()  # Get the JSON data from the request
     if 'text' in data:
-        received_text = data['text']
-        print("Received text:", received_text)
-        return "Text received successfully!"
+        answer = get_answer(data['text'])
+        return answer
     else:
         return "Invalid JSON payload."
 
